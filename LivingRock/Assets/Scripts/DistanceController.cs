@@ -30,18 +30,13 @@ public class DistanceController : MonoBehaviour
         }
     }
 
-    [HideInInspector]
-    public Vector2 teleportPos
+    public void SetTeleportPosX(float x)
     {
-        get
-        {
-            return _teleportPos;
-        }
-
-        set
-        {
-            _teleportPos = value;
-        }
+        _teleportPos = new Vector2(x, _teleportPos.y);
+    }
+    public void SetTeleportPosY(float y)
+    {
+        _teleportPos = new Vector2(_teleportPos.x, y);
     }
 
     [SerializeField] private LineRenderer lifeline;
