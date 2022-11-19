@@ -108,10 +108,20 @@ MonoBehaviour:
   attack: 0.1
   release: 0.5
   deadZone: 0.1
-  front: {fileID: 21300000, guid: f68a84927aa2e2a47907814850383f73, type: 3}
-  back: {fileID: 21300000, guid: 4cfe175f1fb575b46884baa915d9bdfc, type: 3}
-  right: {fileID: 0}
-  left: {fileID: 0}
+  contactFilter2D:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
 --- !u!114 &1548712523724196440
 MonoBehaviour:
   m_ObjectHideFlags: 0
