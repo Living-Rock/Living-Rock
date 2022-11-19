@@ -23,6 +23,16 @@ public class CharacterController : MonoBehaviour
 
     [SerializeField] private float animationFrameTime = 0.25f;
 
+    public enum Pos : int {
+        None = 0,
+        Haut = 1,
+        Bas = 2,
+        Gauche = 3,
+        Droite = 4
+    }
+
+    private int lockPos = 0;
+
     private int currentAnimationStep = 3;
 
     private SpriteRenderer rend;
@@ -106,17 +116,42 @@ public class CharacterController : MonoBehaviour
             lastAnimationFrameDate = Time.time;
         }
 
-        float abs_x = Mathf.Abs(movDir.x);
-        float abs_y = Mathf.Abs(movDir.y);  
-        if (abs_x < abs_y)
+        switch ((Pos)lockPos)
         {
-            if (movDir.y < 0) rend.sprite = front[currentAnimationStep];
-            else rend.sprite = back[currentAnimationStep];
-        } else
-        {
-            if (movDir.x < 0) rend.sprite = left[currentAnimationStep];
-            else rend.sprite = right[currentAnimationStep];
+            case Pos.Haut:
+                rend.sprite = back[currentAnimationStep];
+                break;
+            case Pos.Bas:
+                rend.sprite = front[currentAnimationStep];
+                break;
+            case Pos.Droite:
+                rend.sprite = right[currentAnimationStep];
+                break;
+            case Pos.Gauche:
+                rend.sprite = left[currentAnimationStep];
+                break;
+            default:
+                float abs_x = Mathf.Abs(movDir.x);
+                float abs_y = Mathf.Abs(movDir.y);
+                if (abs_x < abs_y)
+                {
+                    if (movDir.y < 0) rend.sprite = front[currentAnimationStep];
+                    else rend.sprite = back[currentAnimationStep];
+                }
+                else
+                {
+                    if (movDir.x < 0) rend.sprite = left[currentAnimationStep];
+                    else rend.sprite = right[currentAnimationStep];
+                }
+                break;
         }
+
+        
+    }
+
+    public void LockSprite(Pos pos)
+    {
+        lockPos = (int)pos;
     }
 }
 
