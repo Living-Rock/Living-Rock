@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     private Vector2 baseColliderOffset;
     private Vector2 baseColliderSize;
     private CapsuleCollider2D capsuleCollider;
+    private CharacterController characterController;
 
     public bool IsGrabbing { get { return isGrabbing; }}
     // Start is called before the first frame update
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
         capsuleCollider = gameObject.GetComponent<CapsuleCollider2D>();
         baseColliderOffset = capsuleCollider.offset;
         baseColliderSize = capsuleCollider.size;
+        characterController = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -71,6 +73,7 @@ public class Player : MonoBehaviour
                 collider.gameObject.GetComponent<Collider2D>().enabled = true;
                 capsuleCollider.size = baseColliderSize;
                 capsuleCollider.offset = baseColliderOffset;
+                characterController.LockSprite(CharacterController.Pos.None);
                 break;
             }
         }
@@ -85,12 +88,16 @@ public class Player : MonoBehaviour
             movablePos.position = new Vector3(transform.position.x, movablePos.position.y);
             capsuleCollider.size = new Vector2(Mathf.Max(baseColliderSize.x, col.bounds.size.x), (baseColliderSize.y+col.bounds.size.y)*2);
             capsuleCollider.offset = new Vector2(0, baseColliderOffset.y - y_diff/ 2);
+            characterController.LockSprite(y_diff >= 0 ? CharacterController.Pos.Bas : CharacterController.Pos.Haut);
+
         } else
         {
             movablePos.position = new Vector3(movablePos.position.x, transform.position.y);
             capsuleCollider.size = new Vector2((baseColliderSize.x + col.bounds.size.x)*2, Mathf.Max(baseColliderSize.y, col.bounds.size.y));
             capsuleCollider.offset = new Vector2(baseColliderOffset.x - x_diff / 2, 0);
+            characterController.LockSprite(x_diff >= 0 ? CharacterController.Pos.Gauche : CharacterController.Pos.Droite);
         }
 
+        
     }
 }

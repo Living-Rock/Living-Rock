@@ -25,12 +25,16 @@ public class Porte : MonoBehaviour
     private Collider2D doorCollider;
     private SpriteRenderer spriteRenderer;
 
+    private AudioSource porteSound;
 
 
     private void Awake()
     {
         doorCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        porteSound = GameObject.Find("OpenDoorSound").GetComponent<AudioSource>();
+
         UpdateState();
     }
 
@@ -42,6 +46,7 @@ public class Porte : MonoBehaviour
         {
             doorCollider.enabled = false;
             spriteRenderer.sprite = openedDoorSprite;
+            porteSound.Play();
         }
         else
         {
