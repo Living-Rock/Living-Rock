@@ -20,7 +20,6 @@ public class Pics_simples : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("coin");
         if (collision.tag.Equals("Player"))
         {
             open = true;

@@ -28,30 +28,32 @@ public class Dalle : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.tag);
         if(collision.tag == "Player"){
             onPressedByPlayer.Invoke();
             if(onPressedByPlayer.GetPersistentEventCount() > 0)
             {
                 spriteRenderer.sprite = spriteAppuyee;
-                dalleSound.Play();
+                //dalleSound.Play();
             }    
         }
-        else if (collision.tag == "Crystal")
+        if (collision.tag == "Crystal")
         {
             onPressedByCrystal.Invoke();
             if (onPressedByCrystal.GetPersistentEventCount() > 0)
             {
                 spriteRenderer.sprite = spriteAppuyee;
-                dalleSound.Play();
+                //dalleSound.Play();
             }
         }
-        else if (collision.tag == "Movable")
+        if (collision.tag == "Movable")
         {
+            Debug.Log("test");
             onPressedByCaisse.Invoke();
             if (onPressedByCaisse.GetPersistentEventCount() > 0)
             {
                 spriteRenderer.sprite = spriteAppuyee;
-                dalleSound.Play();
+                //dalleSound.Play();
             }             
         }
     }
@@ -66,7 +68,7 @@ public class Dalle : MonoBehaviour
                 spriteRenderer.sprite = spriteDefaut;
             }
         }
-        else if (collision.tag == "Crystal")
+        if (collision.tag == "Crystal")
         {
             onReleasedByCrystal.Invoke();
             if (onReleasedByCrystal.GetPersistentEventCount() > 0)
@@ -74,7 +76,7 @@ public class Dalle : MonoBehaviour
                 spriteRenderer.sprite = spriteDefaut;
             }
         }
-        else if (collision.tag == "Movable")
+        if (collision.tag == "Movable")
         {
             onReleasedByCaisse.Invoke();
             if (onReleasedByCaisse.GetPersistentEventCount() > 0)

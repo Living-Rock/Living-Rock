@@ -2,10 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
-<<<<<<< HEAD
-
-=======
->>>>>>> voheli
 
 public class DistanceController : MonoBehaviour
 {
