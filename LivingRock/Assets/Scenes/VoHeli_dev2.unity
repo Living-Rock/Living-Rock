@@ -272,7 +272,6 @@ PrefabInstance:
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee390e7dac65290419a3d142032ab238, type: 3}
-<<<<<<< HEAD
 --- !u!1001 &751113455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -450,7 +449,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44739aa7299257d48bf8875946fef646, type: 3}
-=======
 --- !u!1 &774314710
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,7 +577,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
->>>>>>> voheli
 --- !u!1 &823912713 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 16873537073349047, guid: ee390e7dac65290419a3d142032ab238, type: 3}
@@ -835,7 +832,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
-<<<<<<< HEAD
+
 --- !u!1001 &1060870040
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -898,7 +895,6 @@ LineRenderer:
   m_CorrespondingSourceObject: {fileID: 142414655469627528, guid: 8acfb2604b0eb5e4a8adeb98c58b7276, type: 3}
   m_PrefabInstance: {fileID: 1060870040}
   m_PrefabAsset: {fileID: 0}
-=======
 --- !u!1 &973360999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,7 +1023,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
->>>>>>> voheli
 --- !u!1001 &1192871101
 PrefabInstance:
   m_ObjectHideFlags: 0
