@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Grab : MonoBehaviour
 {
     private bool isGrabbing;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private float grabDistance;
+
+    [SerializeField] private float crystalSpeedFactor;
+
+    [SerializeField] private int maxEnergy;
+    private int currentEnergy;
+
     private float grabDelay = .3f;
     private float timer = 0f;
     private Vector2 baseColliderOffset;
@@ -53,6 +59,7 @@ public class Player : MonoBehaviour
         {
             if (collider.tag.Equals("Movable") || collider.tag.Equals("Crystal"))
             {
+                if (collider.tag.Equals("Crystal")) gameObject.GetComponent<CharacterController>().SpeedFactor = crystalSpeedFactor;
                 collider.gameObject.transform.parent = transform;
                 collider.gameObject.GetComponent<Collider2D>().enabled = false;
                 correctMovablePosition(collider.transform, collider);
@@ -63,12 +70,14 @@ public class Player : MonoBehaviour
 
     public void DropMovable()
     {
+        gameObject.GetComponent<CharacterController>().SpeedFactor = 1f;
         isGrabbing = false;
         Collider2D[] colliders = gameObject.GetComponentsInChildren<Collider2D>();
         foreach (Collider2D collider in colliders)
         {
             if (collider.tag.Equals("Movable") || collider.tag.Equals("Crystal"))
             {
+
                 collider.gameObject.transform.parent = transform.parent;
                 collider.gameObject.GetComponent<Collider2D>().enabled = true;
                 capsuleCollider.size = baseColliderSize;

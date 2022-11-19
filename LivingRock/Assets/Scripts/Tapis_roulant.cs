@@ -48,8 +48,8 @@ public class Tapis_roulant : MonoBehaviour
                 collider.transform.position += (Vector3)dir * moveSpeed * Time.deltaTime;
             else if (collider.tag.Equals("Player"))
             {
-                if (collider.gameObject.GetComponent<Player>().IsGrabbing)
-                    collider.gameObject.GetComponent<Player>().DropMovable();
+                if (collider.gameObject.GetComponent<Grab>().IsGrabbing)
+                    collider.gameObject.GetComponent<Grab>().DropMovable();
                 else
                     collider.transform.position += (Vector3)dir * moveSpeed * Time.deltaTime;
             }
