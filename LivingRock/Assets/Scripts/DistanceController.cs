@@ -3,7 +3,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+<<<<<<< HEAD
 
+=======
+>>>>>>> voheli
 
 public class DistanceController : MonoBehaviour
 {
@@ -16,7 +19,8 @@ public class DistanceController : MonoBehaviour
     [SerializeField] private float[] visionLossRangeScales = { 1f, .5f, .33f };
 
     [SerializeField] private bool _isOnRecallPlate = false;
-    
+    [SerializeField] private Vector2 _teleportPos = Vector2.zero;
+
     [HideInInspector] public bool isOnRecallPlate
     {
         get
@@ -27,6 +31,20 @@ public class DistanceController : MonoBehaviour
         set
         {
             _isOnRecallPlate = value;
+        }
+    }
+
+    [HideInInspector]
+    public Vector2 teleportPos
+    {
+        get
+        {
+            return _teleportPos;
+        }
+
+        set
+        {
+            _teleportPos = value;
         }
     }
 
@@ -66,6 +84,6 @@ public class DistanceController : MonoBehaviour
     {
         if (!_isOnRecallPlate) return;
 
-        transform.position = crystal.position;
+        transform.position = _teleportPos;
     }
 }
