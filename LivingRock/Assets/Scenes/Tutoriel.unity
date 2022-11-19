@@ -2281,11 +2281,11 @@ PrefabInstance:
       objectReference: {fileID: 937517435}
     - target: {fileID: 8880814668715068359, guid: 12c0f6be922f38445908cb6f36b259b9, type: 3}
       propertyPath: onPressedByPlayer.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DisableCondition
+      value: EnableCondition
       objectReference: {fileID: 0}
     - target: {fileID: 8880814668715068359, guid: 12c0f6be922f38445908cb6f36b259b9, type: 3}
       propertyPath: onReleasedByPlayer.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: EnableCondition
+      value: DisableCondition
       objectReference: {fileID: 0}
     - target: {fileID: 8880814668715068359, guid: 12c0f6be922f38445908cb6f36b259b9, type: 3}
       propertyPath: onPressedByPlayer.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
