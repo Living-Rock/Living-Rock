@@ -20,7 +20,7 @@ public class Piege : MonoBehaviour
     {
         if (collision.tag.Equals("Player"))
         {
-            respawnManager.RespawnPlayer();
+            respawnManager.RestartLevel();
         }
     }
 }
