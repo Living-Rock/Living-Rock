@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Piege : MonoBehaviour
+public class Pics_2temps : MonoBehaviour
 {
-    private RespawnManager respawnManager;
     // Start is called before the first frame update
     void Start()
     {
-        respawnManager = FindObjectOfType<RespawnManager>();
     }
 
     // Update is called once per frame
@@ -20,7 +18,8 @@ public class Piege : MonoBehaviour
     {
         if (collision.tag.Equals("Player"))
         {
-            respawnManager.RestartLevel();
+            RespawnManager.Instance.RespawnPlayer();
+
         }
     }
 }
