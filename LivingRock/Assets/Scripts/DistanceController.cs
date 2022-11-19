@@ -1,11 +1,9 @@
-<<<<<<< HEAD
+
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-=======
-﻿using UnityEngine;
 using UnityEngine.Rendering.Universal;
->>>>>>> voheli
+
 
 public class DistanceController : MonoBehaviour
 {
@@ -51,11 +49,6 @@ public class DistanceController : MonoBehaviour
         float distance = Mathf.Abs(Vector2.Distance(transform.position, crystal.position));
         float scale = _isOnRecallPlate ? recallPlateDieDistanceScale : 1f;
         
-<<<<<<< HEAD
-        //Debug.Log(distance+" "+ (dieDistance * scale));
-        
-=======
->>>>>>> voheli
         if(distance > dieDistance * scale)
             RespawnManager.Instance.RespawnPlayer();
 
