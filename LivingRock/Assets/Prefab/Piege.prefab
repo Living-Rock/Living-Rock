@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7027255481682503318}
   - component: {fileID: 5786712574583875483}
-  - component: {fileID: 8224506599740627424}
   - component: {fileID: -5590342162741842594}
   m_Layer: 0
   m_Name: Piege
@@ -86,18 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8224506599740627424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5804432196826296830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7112dcc25785e8b43879f34bc51aae9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &-5590342162741842594
 BoxCollider2D:
   m_ObjectHideFlags: 0
