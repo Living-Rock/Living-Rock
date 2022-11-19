@@ -12,15 +12,20 @@ public class DistanceController : MonoBehaviour
 
     [HideInInspector] public bool isOnRecallPlate = false;
 
+    [SerializeField] private LineRenderer lifeline;
+
     private float _lightRange;
 
     private void Start()
     {
         _lightRange = light.range;
+        lifeline.positionCount = 2;
     }
 
     private void Update()
     {
+        lifeline.SetPosition(0, transform.position);
+        lifeline.SetPosition(1, crystal.position);
         float distance = Mathf.Abs(Vector2.Distance(transform.position, crystal.position));
         float scale = isOnRecallPlate ? recallPlateDieDistanceScale : 1f;
         
