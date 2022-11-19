@@ -1,5 +1,4 @@
-
-﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -13,6 +12,7 @@ public class DistanceController : MonoBehaviour
     [SerializeField] private Light2D playerLight;
     [SerializeField] private float[] visionLossSteps = { 5f, 10f, 15f };
     [SerializeField] private float[] visionLossRangeScales = { 1f, .5f, .33f };
+    [SerializeField] private float transitionSpeed = 1f;
 
     [SerializeField] private bool _isOnRecallPlate = false;
     [SerializeField] private Vector2 _teleportPos = Vector2.zero;
@@ -47,6 +47,7 @@ public class DistanceController : MonoBehaviour
     [SerializeField] private LineRenderer lifeline;
 
     private float _originalRange;
+    private int _lastStep = 0;
 
     private void Awake()
     {
@@ -68,12 +69,41 @@ public class DistanceController : MonoBehaviour
 
         for (int i = 0; i < visionLossSteps.Length; i++)
         {
-            if (distance < visionLossSteps[i])
+            if (distance <= visionLossSteps[i])
             {
-                playerLight.shapeLightFalloffSize = _originalRange * visionLossRangeScales[i];
+                Debug.Log(_lastStep+" "+i+" "+distance);
+                if (_lastStep != i)
+                    StartCoroutine(TransitionCo(_originalRange * visionLossRangeScales[i], _lastStep > i));
+                
+                _lastStep = i;
                 break;
             }
         }
+    }
+
+    private IEnumerator TransitionCo(float targetRange, bool ascending)
+    {
+        float step = Mathf.Abs(targetRange - playerLight.shapeLightFalloffSize) / transitionSpeed;
+        
+        if (ascending)
+        {
+            while (targetRange - playerLight.shapeLightFalloffSize >= 0)
+            {
+                playerLight.shapeLightFalloffSize += step * Time.deltaTime;
+                yield return null;
+            }
+        }
+        else
+        {
+            while (targetRange - playerLight.shapeLightFalloffSize <= 0)
+            {
+                playerLight.shapeLightFalloffSize -= step * Time.deltaTime;
+                yield return null;
+            }
+        }
+        
+        playerLight.shapeLightFalloffSize = targetRange;
+        yield return null;
     }
 
     private void TryTeleport()
