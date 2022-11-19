@@ -13,7 +13,15 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private float deadZone = 0.1f;
 
     private Vector2 velocity = Vector2.zero;
+    private CapsuleCollider2D capsuleCollider2D;
+    private ContactFilter2D contactFilter2D;
 
+    private void Awake()
+    {
+        capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        contactFilter2D = new ContactFilter2D();
+        contactFilter2D = contactFilter2D.NoFilter();
+    }
 
     private void UpdateVelocity(Vector2 moveVector)
     {
@@ -34,10 +42,43 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    private void DetectCollision()
+    {
+        List<RaycastHit2D> results = new List<RaycastHit2D>();
+
+        
+        int count = capsuleCollider2D.Cast(velocity, contactFilter2D, results, (velocity*Time.deltaTime).magnitude, true);
+
+        if (count == 0) return;
+
+        /*RaycastHit2D closest_hit;
+        float closest_dist = Mathf.Infinity;
+
+        foreach(RaycastHit2D hit in results)
+        {
+            float dist = hit.distance;
+            if (dist < closest_dist)
+            {
+                closest_hit = hit;
+                closest_dist = dist;
+            }
+            
+        }*/
+
+        foreach (RaycastHit2D hit in results)
+        {
+            
+            Vector2 normal = hit.normal;
+
+            velocity = velocity - Vector2.Dot(velocity.normalized, normal)*normal;
+            transform.position += (Vector3)(velocity.normalized * hit.distance);
+        }
+
+
+    }
+
     void Update()
     {
-        //SIMPLE MOVE
-
         Vector2 moveVector = playerInput.actions["Move"].ReadValue<Vector2>();
 
 
@@ -49,7 +90,7 @@ public class CharacterController : MonoBehaviour
 
         UpdateVelocity(moveVector);
 
-        
+        DetectCollision();
 
         transform.position += (Vector3)(velocity * Time.deltaTime);
     }
