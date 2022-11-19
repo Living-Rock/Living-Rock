@@ -8,7 +8,7 @@ public class SceneTransition : MonoBehaviour
     [SerializeField] private int mainMenuBuildIndex;
     [SerializeField] private bool fadeOutOnStart = true;
     [SerializeField] private bool fadeInOnSceneTransition = true;
-    [SerializeField] private float fadeInDuration = .4f;
+    [SerializeField] private float fadeInDuration = 1f;
     
     public static SceneTransition Instance { get; private set; }
 
@@ -35,7 +35,6 @@ public class SceneTransition : MonoBehaviour
     {
         if (fadeInOnSceneTransition)
         {
-            Debug.Log(fader.gameObject.activeSelf);
             fader.SetTrigger("FadeIn");
             yield return new WaitForSeconds(fadeInDuration);
         }
