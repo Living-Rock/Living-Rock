@@ -954,7 +954,6 @@ MonoBehaviour:
   playerInput: {fileID: 1627048004777422498}
   grabDistance: 0.7
   crystalSpeedFactor: 0.8
-  maxEnergy: 100
 --- !u!50 &6759374158161858211
 Rigidbody2D:
   serializedVersion: 4
@@ -1004,6 +1003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d49c209d538d489cb4f97c4f888ea76e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 1627048004777422498}
   crystal: {fileID: 0}
   dieDistance: 15
   recallPlateDieDistanceScale: 2
@@ -1016,7 +1016,11 @@ MonoBehaviour:
   - 1
   - 0.5
   - 0.33
-  isOnRecallPlate: 0
+  visionTransitionSpeed: 1
+  initColor: {r: 1, g: 1, b: 1, a: 0}
+  dangerColor: {r: 1, g: 0, b: 0, a: 0}
+  _isOnRecallPlate: 0
+  _teleportPos: {x: 0, y: 0}
   lifeline: {fileID: 0}
 --- !u!1 &1627048004777422501
 GameObject:

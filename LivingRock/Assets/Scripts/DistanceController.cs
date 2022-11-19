@@ -12,12 +12,14 @@ public class DistanceController : MonoBehaviour
     [SerializeField] private Light2D playerLight;
     [SerializeField] private float[] visionLossSteps = { 5f, 10f, 15f };
     [SerializeField] private float[] visionLossRangeScales = { 1f, .5f, .33f };
-    [SerializeField] private float transitionSpeed = 1f;
+    [SerializeField] private float visionTransitionSpeed = 1f;
+    [SerializeField] private Color initColor;
+    [SerializeField] private Color dangerColor;
 
     [SerializeField] private bool _isOnRecallPlate = false;
     [SerializeField] private Vector2 _teleportPos = Vector2.zero;
 
-    [HideInInspector] public bool isOnRecallPlate
+    public bool isOnRecallPlate
     {
         get
         {
@@ -59,6 +61,11 @@ public class DistanceController : MonoBehaviour
         float distance = Mathf.Abs(Vector2.Distance(transform.position, crystal.position));
         Debug.Log(distance);
         float scale = _isOnRecallPlate ? recallPlateDieDistanceScale : 1f;
+
+        Color color = Color.Lerp(initColor, dangerColor, distance / (dieDistance * scale));
+        color.a = 1f;
+        lifeline.startColor = color;
+        lifeline.endColor = color;
         
         if(distance > dieDistance * scale)
             RespawnManager.Instance.RespawnPlayer();
@@ -78,7 +85,7 @@ public class DistanceController : MonoBehaviour
 
     private IEnumerator TransitionCo(float targetRange, bool ascending)
     {
-        float step = Mathf.Abs(targetRange - playerLight.shapeLightFalloffSize) / transitionSpeed;
+        float step = Mathf.Abs(targetRange - playerLight.shapeLightFalloffSize) / visionTransitionSpeed;
         
         if (ascending)
         {
