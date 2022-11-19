@@ -42,7 +42,6 @@ public class Tapis_roulant : MonoBehaviour
     void Update()
     {
         Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, bounds, 0);
-        Debug.Log(colliders.Length);
         foreach (Collider2D collider in colliders)
         {
             if (collider.tag.Equals("Movable") || collider.tag.Equals("Crystal") )

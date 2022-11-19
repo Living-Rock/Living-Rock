@@ -24,7 +24,8 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag.Equals("Player"))
+        Debug.Log(collision.gameObject.tag);
+        if (collision.gameObject.tag.Equals("Player") || collision.gameObject.tag.Equals("Crystal"))
             RespawnManager.Instance.RespawnPlayer();
         Destroy(gameObject);
     }
