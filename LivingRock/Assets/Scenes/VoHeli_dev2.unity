@@ -1173,6 +1173,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8880814668715068359, guid: 12c0f6be922f38445908cb6f36b259b9, type: 3}
+      propertyPath: spriteOn
+      value: 
+      objectReference: {fileID: 21300000, guid: 3d63c88856a6a5f4abc127043e6cc5c5, type: 3}
+    - target: {fileID: 8880814668715068359, guid: 12c0f6be922f38445908cb6f36b259b9, type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 573969688750372265}
