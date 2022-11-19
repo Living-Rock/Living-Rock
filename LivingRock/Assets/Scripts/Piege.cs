@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Piege : MonoBehaviour
 {
-
+    private RespawnManager respawnManager;
     // Start is called before the first frame update
     void Start()
     {
-
+        respawnManager = FindObjectOfType<RespawnManager>();
     }
 
     // Update is called once per frame
@@ -21,7 +21,7 @@ public class Piege : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-
+            respawnManager.RespawnPlayer();
         }
     }
 }

@@ -21,6 +21,7 @@ public class RespawnManager : MonoBehaviour
 
     public void RespawnPlayer()
     {
-
+        player.transform.position = startPosition.position;
+        player.transform.rotation = startPosition.rotation; 
     }
 }
