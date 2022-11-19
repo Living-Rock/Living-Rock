@@ -59,7 +59,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122,6 +122,11 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  front: []
+  back: []
+  right: []
+  left: []
+  animationFrameTime: 0.25
 --- !u!114 &1548712523724196440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,16 +193,17 @@ MonoBehaviour:
   crystal: {fileID: 0}
   dieDistance: 15
   recallPlateDieDistanceScale: 2
-  light: {fileID: 7978839501064427107}
+  playerLight: {fileID: 0}
   visionLossSteps:
   - 5
   - 10
   - 15
-  visionLossScales:
+  visionLossRangeScales:
   - 1
   - 0.5
   - 0.33
   isOnRecallPlate: 0
+  lifeline: {fileID: 0}
 --- !u!1 &5228924502894663130
 GameObject:
   m_ObjectHideFlags: 0
