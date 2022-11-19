@@ -74,8 +74,8 @@ public class DistanceController : MonoBehaviour
         if (distance >= dangerDistance)
         {
             float t = (1/(dieDistance * scale - dangerDistance)) * distance - 1 * dangerDistance / (dieDistance * scale - dangerDistance);
-            tmp.a = t;
-            tmp_2.a = t;
+            tmp.a = t*0.8f;
+            tmp_2.a = t*0.8f;
             dangerRedVeil.color = tmp;
             dangerBlackVeil.color = tmp_2;
         }
