@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,7 @@ public class SceneTransition : MonoBehaviour
     [SerializeField] private int mainMenuBuildIndex;
     [SerializeField] private bool fadeOutOnStart = true;
     [SerializeField] private bool fadeInOnSceneTransition = true;
+    [SerializeField] private float fadeInDuration = .4f;
     
     public static SceneTransition Instance { get; private set; }
 
@@ -21,27 +23,30 @@ public class SceneTransition : MonoBehaviour
     private void Start()
     {
         if (fadeOutOnStart)
-        {
-            fader.gameObject.SetActive(true);
             fader.SetTrigger("FadeOut");
-        }
     }
 
     public void LoadScene(int buildIndex)
     {
+        StartCoroutine(TransitionCo(buildIndex));
+    }
+
+    private IEnumerator TransitionCo(int buildIndex)
+    {
         if (fadeInOnSceneTransition)
         {
-            fader.gameObject.SetActive(true);
             Debug.Log(fader.gameObject.activeSelf);
             fader.SetTrigger("FadeIn");
+            yield return new WaitForSeconds(fadeInDuration);
         }
 
         SceneManager.LoadScene(buildIndex);
+        yield return null;
     }
     
     public void LoadNextScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void ReloadCurrentScene()

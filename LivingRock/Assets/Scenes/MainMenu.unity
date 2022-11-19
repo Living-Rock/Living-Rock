@@ -918,8 +918,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fader: {fileID: 1797131303}
   mainMenuBuildIndex: 0
-  fadeOutOnStart: 0
+  fadeOutOnStart: 1
   fadeInOnSceneTransition: 1
+  fadeInDuration: 1
 --- !u!4 &699404834
 Transform:
   m_ObjectHideFlags: 0
@@ -1515,7 +1516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1797131300
 RectTransform:
   m_ObjectHideFlags: 0
