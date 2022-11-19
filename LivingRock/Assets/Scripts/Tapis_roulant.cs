@@ -45,7 +45,7 @@ public class Tapis_roulant : MonoBehaviour
         Debug.Log(colliders.Length);
         foreach (Collider2D collider in colliders)
         {
-            if (collider.tag.Equals("Movable") )
+            if (collider.tag.Equals("Movable") || collider.tag.Equals("Crystal") )
                 collider.transform.position += (Vector3)dir * moveSpeed * Time.deltaTime;
             else if (collider.tag.Equals("Player"))
             {

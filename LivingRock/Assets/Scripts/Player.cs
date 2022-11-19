@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, grabDistance);
         foreach (Collider2D collider in colliders)
         {
-            if (collider.tag.Equals("Movable"))
+            if (collider.tag.Equals("Movable") || collider.tag.Equals("Crystal"))
             {
                 collider.gameObject.transform.parent = transform;
                 collider.gameObject.GetComponent<Collider2D>().enabled = false;
@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
         Collider2D[] colliders = gameObject.GetComponentsInChildren<Collider2D>();
         foreach (Collider2D collider in colliders)
         {
-            if (collider.tag.Equals("Movable"))
+            if (collider.tag.Equals("Movable") || collider.tag.Equals("Crystal"))
             {
                 collider.gameObject.transform.parent = transform.parent;
                 collider.gameObject.GetComponent<Collider2D>().enabled = true;
