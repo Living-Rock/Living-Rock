@@ -30,20 +30,29 @@ public class Dalle : MonoBehaviour
     {
         if(collision.tag == "Player"){
             onPressedByPlayer.Invoke();
-            spriteRenderer.sprite = spriteAppuyee;
-            dalleSound.Play();
+            if(onPressedByPlayer.GetPersistentEventCount() > 0)
+            {
+                spriteRenderer.sprite = spriteAppuyee;
+                dalleSound.Play();
+            }    
         }
         else if (collision.tag == "Crystal")
         {
             onPressedByCrystal.Invoke();
-            spriteRenderer.sprite = spriteAppuyee;
-            dalleSound.Play();
+            if (onPressedByPlayer.GetPersistentEventCount() > 0)
+            {
+                spriteRenderer.sprite = spriteAppuyee;
+                dalleSound.Play();
+            }
         }
         else if (collision.tag == "Caisse")
         {
             onPressedByCaisse.Invoke();
-            spriteRenderer.sprite = spriteAppuyee;
-            dalleSound.Play();
+            if (onPressedByCaisse.GetPersistentEventCount() > 0)
+            {
+                spriteRenderer.sprite = spriteAppuyee;
+                dalleSound.Play();
+            }             
         }
     }
 
@@ -52,17 +61,26 @@ public class Dalle : MonoBehaviour
         if (collision.tag == "Player")
         {
             onReleasedByPlayer.Invoke();
-            spriteRenderer.sprite = spriteDefaut;
+            if (onReleasedByPlayer.GetPersistentEventCount() > 0)
+            {
+                spriteRenderer.sprite = spriteDefaut;
+            }
         }
         else if (collision.tag == "Crystal")
         {
             onReleasedByCrystal.Invoke();
-            spriteRenderer.sprite = spriteDefaut;
+            if (onReleasedByCrystal.GetPersistentEventCount() > 0)
+            {
+                spriteRenderer.sprite = spriteDefaut;
+            }
         }
         else if (collision.tag == "Caisse")
         {
             onReleasedByCaisse.Invoke();
-            spriteRenderer.sprite = spriteDefaut;
+            if (onReleasedByCaisse.GetPersistentEventCount() > 0)
+            {
+                spriteRenderer.sprite = spriteDefaut;
+            }
         }
     }
 
