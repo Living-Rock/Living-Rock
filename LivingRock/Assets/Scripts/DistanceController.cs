@@ -67,7 +67,6 @@ public class DistanceController : MonoBehaviour
         {
             if (distance <= visionLossSteps[i])
             {
-                Debug.Log(_lastStep+" "+i+" "+distance);
                 if (_lastStep != i)
                     StartCoroutine(TransitionCo(_originalRange * visionLossRangeScales[i], _lastStep > i));
                 
