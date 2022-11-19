@@ -11,8 +11,6 @@ public class Grab : MonoBehaviour
 
     [SerializeField] private float crystalSpeedFactor;
 
-    [SerializeField] private int maxEnergy;
-    private int currentEnergy;
 
     private float grabDelay = .3f;
     private float timer = 0f;
