@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,7 +14,7 @@ public class CharacterController : MonoBehaviour
 
     private Vector2 velocity = Vector2.zero;
     private CapsuleCollider2D capsuleCollider2D;
-    [SerializeField] private ContactFilter2D contactFilter2D;
+    private ContactFilter2D contactFilter2D;
 
     [SerializeField] private Sprite front;
     [SerializeField] private Sprite back;
@@ -26,6 +26,8 @@ public class CharacterController : MonoBehaviour
     private void Awake()
     {
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        contactFilter2D = new ContactFilter2D();
+        contactFilter2D = contactFilter2D.NoFilter();
         rend = gameObject.GetComponent<SpriteRenderer>();
         rend.sprite = front;
     }
@@ -58,18 +60,27 @@ public class CharacterController : MonoBehaviour
 
         if (count == 0) return;
 
-        
+        /*RaycastHit2D closest_hit;
+        float closest_dist = Mathf.Infinity;
+
+        foreach(RaycastHit2D hit in results)
+        {
+            float dist = hit.distance;
+            if (dist < closest_dist)
+            {
+                closest_hit = hit;
+                closest_dist = dist;
+            }
+            
+        }*/
 
         foreach (RaycastHit2D hit in results)
-        { 
+        {
             Vector2 normal = hit.normal;
 
-            //Projection orthonormale sur la tangente du plan de collision
             velocity = velocity - Vector2.Dot(velocity.normalized, normal)*normal;
             transform.position += (Vector3)(velocity.normalized * hit.distance);
         }
-
-
     }
 
     void Update()
@@ -82,7 +93,6 @@ public class CharacterController : MonoBehaviour
         {
             moveVector = moveVector.normalized;
         }
-
 
         UpdateVelocity(moveVector);
 
@@ -108,19 +118,3 @@ public class CharacterController : MonoBehaviour
         }
     }
 }
-
-
-
-/*      RaycastHit2D closest_hit;
-        float closest_dist = Mathf.Infinity;
-
-        foreach(RaycastHit2D hit in results)
-        {
-            float dist = hit.distance;
-            if (dist < closest_dist)
-            {
-                closest_hit = hit;
-                closest_dist = dist;
-            }
-            
-        }*/
