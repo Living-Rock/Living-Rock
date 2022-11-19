@@ -8,8 +8,11 @@ public class CharacterController : MonoBehaviour
 
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private float playerSpeed;
+    [SerializeField] private float attack = 0.1f;
+    [SerializeField] private float release = 0.5f;
 
-    
+    private Vector2 velocity;
+
     void Update()
     {
         //SIMPLE MOVE
