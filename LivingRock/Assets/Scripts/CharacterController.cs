@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,11 +14,13 @@ public class CharacterController : MonoBehaviour
 
     private Vector2 velocity = Vector2.zero;
     private CapsuleCollider2D capsuleCollider2D;
-    [SerializeField] private ContactFilter2D contactFilter2D;
+    private ContactFilter2D contactFilter2D;
 
     private void Awake()
     {
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        contactFilter2D = new ContactFilter2D();
+        contactFilter2D = contactFilter2D.NoFilter();
     }
 
     private void UpdateVelocity(Vector2 moveVector)
@@ -49,41 +51,7 @@ public class CharacterController : MonoBehaviour
 
         if (count == 0) return;
 
-        
-
-        foreach (RaycastHit2D hit in results)
-        { 
-            Vector2 normal = hit.normal;
-
-            //Projection orthonormale sur la tangente du plan de collision
-            velocity = velocity - Vector2.Dot(velocity.normalized, normal)*normal;
-            transform.position += (Vector3)(velocity.normalized * hit.distance);
-        }
-
-
-    }
-
-    void Update()
-    {
-        Vector2 moveVector = playerInput.actions["Move"].ReadValue<Vector2>();
-
-
-        if(moveVector.sqrMagnitude > 1)
-        {
-            moveVector = moveVector.normalized;
-        }
-
-
-        UpdateVelocity(moveVector);
-
-        DetectCollision();
-
-        transform.position += (Vector3)(velocity * Time.deltaTime);
-    }
-}
-
-
-/*      RaycastHit2D closest_hit;
+        /*RaycastHit2D closest_hit;
         float closest_dist = Mathf.Infinity;
 
         foreach(RaycastHit2D hit in results)
@@ -96,3 +64,30 @@ public class CharacterController : MonoBehaviour
             }
             
         }*/
+
+        foreach (RaycastHit2D hit in results)
+        {
+            Vector2 normal = hit.normal;
+
+            velocity = velocity - Vector2.Dot(velocity.normalized, normal)*normal;
+            transform.position += (Vector3)(velocity.normalized * hit.distance);
+        }
+    }
+
+    void Update()
+    {
+        Vector2 moveVector = playerInput.actions["Move"].ReadValue<Vector2>();
+
+
+        if(moveVector.sqrMagnitude > 1)
+        {
+            moveVector = moveVector.normalized;
+        }
+
+        UpdateVelocity(moveVector);
+
+        DetectCollision();
+
+        transform.position += (Vector3)(velocity * Time.deltaTime);
+    }
+}
