@@ -42,15 +42,14 @@ public class Tapis_roulant : MonoBehaviour
     void Update()
     {
         Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, bounds, 0);
-        Debug.Log(colliders.Length);
         foreach (Collider2D collider in colliders)
         {
             if (collider.tag.Equals("Movable") || collider.tag.Equals("Crystal") )
                 collider.transform.position += (Vector3)dir * moveSpeed * Time.deltaTime;
             else if (collider.tag.Equals("Player"))
             {
-                if (collider.gameObject.GetComponent<Player>().IsGrabbing)
-                    collider.gameObject.GetComponent<Player>().DropMovable();
+                if (collider.gameObject.GetComponent<Grab>().IsGrabbing)
+                    collider.gameObject.GetComponent<Grab>().DropMovable();
                 else
                     collider.transform.position += (Vector3)dir * moveSpeed * Time.deltaTime;
             }

@@ -16,6 +16,9 @@ public class CharacterController : MonoBehaviour
     private CapsuleCollider2D capsuleCollider2D;
     [SerializeField] private ContactFilter2D contactFilter2D;
 
+    private float speedFactor = 1f;
+    public float SpeedFactor { get { return speedFactor; } set { speedFactor = value; } }
+
     [SerializeField] private Sprite[] front;
     [SerializeField] private Sprite[] back;
     [SerializeField] private Sprite[] right;
@@ -100,7 +103,7 @@ public class CharacterController : MonoBehaviour
 
         DetectCollision();
 
-        transform.position += (Vector3)(velocity * Time.deltaTime);
+        transform.position += (Vector3)(velocity * Time.deltaTime * speedFactor);
 
         
     }

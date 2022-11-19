@@ -953,6 +953,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 1627048004777422498}
   grabDistance: 0.7
+  crystalSpeedFactor: 0.8
+  maxEnergy: 100
 --- !u!50 &6759374158161858211
 Rigidbody2D:
   serializedVersion: 4
