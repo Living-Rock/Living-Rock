@@ -30,33 +30,10 @@ public class Player : MonoBehaviour
             timer = Time.time;
             if (!isGrabbing)
             {
-                isGrabbing=true;
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, grabDistance);
-                foreach (Collider2D collider in colliders)
-                {
-                    if (collider.tag.Equals("Movable"))
-                    {
-                        collider.gameObject.transform.parent = transform;
-                        collider.gameObject.GetComponent<Collider2D>().enabled = false;
-                        correctMovablePosition(collider.transform, collider);
-                        break;
-                    }
-                }
+                PickupMovable();
             } else
             {
-                isGrabbing=false;
-                Collider2D[] colliders = gameObject.GetComponentsInChildren<Collider2D>();
-                foreach (Collider2D collider in colliders)
-                {
-                    if (collider.tag.Equals("Movable"))
-                    {
-                        collider.gameObject.transform.parent = transform.parent;
-                        collider.gameObject.GetComponent<Collider2D>().enabled = true;
-                        capsuleCollider.size = baseColliderSize;
-                        capsuleCollider.offset = baseColliderOffset;
-                        break;
-                    }
-                }
+                DropMovable();
             }
         }
         
@@ -64,6 +41,38 @@ public class Player : MonoBehaviour
 
     }
 
+    private void PickupMovable()
+    {
+        isGrabbing = true;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, grabDistance);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.tag.Equals("Movable"))
+            {
+                collider.gameObject.transform.parent = transform;
+                collider.gameObject.GetComponent<Collider2D>().enabled = false;
+                correctMovablePosition(collider.transform, collider);
+                break;
+            }
+        }
+    }
+
+    public void DropMovable()
+    {
+        isGrabbing = false;
+        Collider2D[] colliders = gameObject.GetComponentsInChildren<Collider2D>();
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.tag.Equals("Movable"))
+            {
+                collider.gameObject.transform.parent = transform.parent;
+                collider.gameObject.GetComponent<Collider2D>().enabled = true;
+                capsuleCollider.size = baseColliderSize;
+                capsuleCollider.offset = baseColliderOffset;
+                break;
+            }
+        }
+    }
     private void correctMovablePosition(Transform movablePos, Collider2D col)
     {
         float x_diff = transform.position.x - movablePos.position.x;
