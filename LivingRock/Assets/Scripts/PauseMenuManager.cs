@@ -1,11 +1,12 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PauseMenuManager : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Menu pauseMenu;
+    [SerializeField] private Menu optionMenu;
+    [SerializeField] private GameObject optionButton;
     
     private void Awake()
     {
@@ -14,16 +15,23 @@ public class PauseMenuManager : MonoBehaviour
 
     public void SetPause()
     {
-        if (!pauseMenu.gameObject.activeSelf)
+        if (optionMenu.gameObject.activeSelf)
         {
-            pauseMenu.gameObject.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(pauseMenu.FirstSelected);
-            Time.timeScale = 0;
+            pauseMenu.Show(optionButton);
+            optionMenu.Hide();
         }
         else
         {
-            pauseMenu.gameObject.SetActive(false);
-            Time.timeScale = 1;
+            if (!pauseMenu.gameObject.activeSelf)
+            {
+                pauseMenu.Show();
+                Time.timeScale = 0;
+            }
+            else
+            {
+                pauseMenu.Hide();
+                Time.timeScale = 1;
+            }
         }
     }
 
