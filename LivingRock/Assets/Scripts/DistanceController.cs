@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class DistanceController : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class DistanceController : MonoBehaviour
 
     [SerializeField] private bool _isOnRecallPlate = false;
     [SerializeField] private Vector2 _teleportPos = Vector2.zero;
+    [SerializeField] private Image dangerRedVeil;
+    [SerializeField] private Image dangerBlackVeil;
 
     public bool isOnRecallPlate
     {
@@ -64,6 +67,19 @@ public class DistanceController : MonoBehaviour
 
         Color color = Color.Lerp(initColor, dangerColor, distance / (dieDistance * scale));
         color.a = 1f;
+
+        float dangerDistance = 0.5f * dieDistance * scale;
+        Color tmp = dangerRedVeil.color;
+        Color tmp_2 = dangerBlackVeil.color;
+        if (distance >= dangerDistance)
+        {
+            float t = (1/(dieDistance * scale - dangerDistance)) * distance - 1 * dangerDistance / (dieDistance * scale - dangerDistance);
+            tmp.a = t;
+            tmp_2.a = t;
+            dangerRedVeil.color = tmp;
+            dangerBlackVeil.color = tmp_2;
+        }
+
         lifeline.startColor = color;
         lifeline.endColor = color;
         
