@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     private Vector2 baseColliderOffset;
     private Vector2 baseColliderSize;
     private CapsuleCollider2D capsuleCollider;
+
+    public bool IsGrabbing { get { return isGrabbing; }}
     // Start is called before the first frame update
     void Start()
     {

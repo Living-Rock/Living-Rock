@@ -16,9 +16,18 @@ public class CharacterController : MonoBehaviour
     private CapsuleCollider2D capsuleCollider2D;
     [SerializeField] private ContactFilter2D contactFilter2D;
 
+    [SerializeField] private Sprite front;
+    [SerializeField] private Sprite back;
+    [SerializeField] private Sprite right;
+    [SerializeField] private Sprite left;
+
+    private SpriteRenderer rend;
+
     private void Awake()
     {
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        rend = gameObject.GetComponent<SpriteRenderer>();
+        rend.sprite = front;
     }
 
     private void UpdateVelocity(Vector2 moveVector)
@@ -68,6 +77,7 @@ public class CharacterController : MonoBehaviour
         Vector2 moveVector = playerInput.actions["Move"].ReadValue<Vector2>();
 
 
+
         if(moveVector.sqrMagnitude > 1)
         {
             moveVector = moveVector.normalized;
@@ -79,8 +89,26 @@ public class CharacterController : MonoBehaviour
         DetectCollision();
 
         transform.position += (Vector3)(velocity * Time.deltaTime);
+
+        UpdateSprite(moveVector);
+    }
+
+    private void UpdateSprite(Vector2 movDir)
+    {
+        float abs_x = Mathf.Abs(movDir.x);
+        float abs_y = Mathf.Abs(movDir.y);  
+        if (abs_x < abs_y)
+        {
+            if (movDir.y < 0) rend.sprite = front;
+            else rend.sprite = back;
+        } else
+        {
+            if (movDir.x < 0) rend.sprite = left;
+            else rend.sprite = right;
+        }
     }
 }
+
 
 
 /*      RaycastHit2D closest_hit;
