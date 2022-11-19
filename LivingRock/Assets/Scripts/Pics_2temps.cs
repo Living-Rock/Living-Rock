@@ -18,7 +18,7 @@ public class Pics_2temps : MonoBehaviour
     {
         if (collision.tag.Equals("Player"))
         {
-            RespawnManager.Instance.RestartLevel();
+            RespawnManager.Instance.RespawnPlayer();
 
         }
     }

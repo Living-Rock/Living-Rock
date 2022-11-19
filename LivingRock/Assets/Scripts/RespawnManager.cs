@@ -34,7 +34,7 @@ public class RespawnManager : MonoBehaviour
     {
     }
 
-    public void RestartLevel()
+    public void RespawnPlayer()
     {
         SceneManager.LoadSceneAsync(currentScene);
     }
