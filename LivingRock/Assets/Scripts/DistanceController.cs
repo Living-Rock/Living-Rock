@@ -28,9 +28,7 @@ public class DistanceController : MonoBehaviour
         lifeline.SetPosition(1, crystal.position);
         float distance = Mathf.Abs(Vector2.Distance(transform.position, crystal.position));
         float scale = isOnRecallPlate ? recallPlateDieDistanceScale : 1f;
-        
-        Debug.Log(distance+" "+ (dieDistance * scale));
-        
+                
         if(distance > dieDistance * scale)
             RespawnManager.Instance.RespawnPlayer();
 
