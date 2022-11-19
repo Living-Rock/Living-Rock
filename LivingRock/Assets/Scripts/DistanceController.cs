@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+=======
+﻿using UnityEngine;
+using UnityEngine.Rendering.Universal;
+>>>>>>> voheli
 
 public class DistanceController : MonoBehaviour
 {
@@ -8,9 +13,9 @@ public class DistanceController : MonoBehaviour
     [SerializeField] private Transform crystal;
     [SerializeField] private float dieDistance = 15f;
     [SerializeField] private float recallPlateDieDistanceScale = 2f;
-    [SerializeField] private Light light;
+    [SerializeField] private Light2D playerLight;
     [SerializeField] private float[] visionLossSteps = { 5f, 10f, 15f };
-    [SerializeField] private float[] visionLossScales = { 1f, .5f, .33f };
+    [SerializeField] private float[] visionLossRangeScales = { 1f, .5f, .33f };
 
     [SerializeField] private bool _isOnRecallPlate = false;
     
@@ -29,11 +34,11 @@ public class DistanceController : MonoBehaviour
 
     [SerializeField] private LineRenderer lifeline;
 
-    private float _lightRange;
+    private float _originalRange;
 
-    private void Start()
+    private void Awake()
     {
-        _lightRange = light.range;
+        _originalRange = playerLight.shapeLightFalloffSize;
         lifeline.positionCount = 2;
 
         playerInput.actions["Teleportation"].performed += _ => TryTeleport();
@@ -46,8 +51,11 @@ public class DistanceController : MonoBehaviour
         float distance = Mathf.Abs(Vector2.Distance(transform.position, crystal.position));
         float scale = _isOnRecallPlate ? recallPlateDieDistanceScale : 1f;
         
+<<<<<<< HEAD
         //Debug.Log(distance+" "+ (dieDistance * scale));
         
+=======
+>>>>>>> voheli
         if(distance > dieDistance * scale)
             RespawnManager.Instance.RespawnPlayer();
 
@@ -55,7 +63,7 @@ public class DistanceController : MonoBehaviour
         {
             if (distance < visionLossSteps[i])
             {
-                light.range = _lightRange * visionLossScales[i];
+                playerLight.shapeLightFalloffSize = _originalRange * visionLossRangeScales[i];
                 break;
             }
         }
