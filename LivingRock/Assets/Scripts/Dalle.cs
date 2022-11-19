@@ -17,28 +17,42 @@ public class Dalle : MonoBehaviour
 
 
     private SpriteRenderer spriteRenderer;
+    private AudioSource dalleSound;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = spriteDefaut;
+        dalleSound = GameObject.Find("DalleSound").GetComponent<AudioSource>();
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player"){
             onPressedByPlayer.Invoke();
-            spriteRenderer.sprite = spriteAppuyee;
+            if(onPressedByPlayer.GetPersistentEventCount() > 0)
+            {
+                spriteRenderer.sprite = spriteAppuyee;
+                dalleSound.Play();
+            }    
         }
         else if (collision.tag == "Crystal")
         {
             onPressedByCrystal.Invoke();
-            spriteRenderer.sprite = spriteAppuyee;
+            if (onPressedByCrystal.GetPersistentEventCount() > 0)
+            {
+                spriteRenderer.sprite = spriteAppuyee;
+                dalleSound.Play();
+            }
         }
-        else if (collision.tag == "Caisse")
+        else if (collision.tag == "Movable")
         {
             onPressedByCaisse.Invoke();
-            spriteRenderer.sprite = spriteAppuyee;
+            if (onPressedByCaisse.GetPersistentEventCount() > 0)
+            {
+                spriteRenderer.sprite = spriteAppuyee;
+                dalleSound.Play();
+            }             
         }
     }
 
@@ -47,17 +61,26 @@ public class Dalle : MonoBehaviour
         if (collision.tag == "Player")
         {
             onReleasedByPlayer.Invoke();
-            spriteRenderer.sprite = spriteDefaut;
+            if (onReleasedByPlayer.GetPersistentEventCount() > 0)
+            {
+                spriteRenderer.sprite = spriteDefaut;
+            }
         }
         else if (collision.tag == "Crystal")
         {
             onReleasedByCrystal.Invoke();
-            spriteRenderer.sprite = spriteDefaut;
+            if (onReleasedByCrystal.GetPersistentEventCount() > 0)
+            {
+                spriteRenderer.sprite = spriteDefaut;
+            }
         }
-        else if (collision.tag == "Caisse")
+        else if (collision.tag == "Movable")
         {
             onReleasedByCaisse.Invoke();
-            spriteRenderer.sprite = spriteDefaut;
+            if (onReleasedByCaisse.GetPersistentEventCount() > 0)
+            {
+                spriteRenderer.sprite = spriteDefaut;
+            }
         }
     }
 

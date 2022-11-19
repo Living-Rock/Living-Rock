@@ -19,6 +19,8 @@ public class Levier : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Collider2D rangeCollider;
     private GameObject player;
+    private AudioSource enableSoundSource;
+    private AudioSource disableSoundSource;
 
     private void Awake()
     {
@@ -28,6 +30,9 @@ public class Levier : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
 
         playerInput.actions["Interaction"].performed += _ => OnInteract();
+
+        enableSoundSource = GameObject.Find("EnableSound").GetComponent<AudioSource>();
+        disableSoundSource = GameObject.Find("DisableSound").GetComponent<AudioSource>();
     }
 
     public void OnInteract()
@@ -39,11 +44,13 @@ public class Levier : MonoBehaviour
             {
                 spriteRenderer.sprite = spriteOn;
                 onPressedByPlayer.Invoke();
+                enableSoundSource.Play();
             }
             else
             {
                 spriteRenderer.sprite = spriteOff;
                 onReleasedByPlayer.Invoke();
+                disableSoundSource.Play();
             }
         }
     }
