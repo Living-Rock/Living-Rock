@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Pics_2temps : MonoBehaviour
 {
-    private RespawnManager respawnManager;
     // Start is called before the first frame update
     void Start()
     {
-        respawnManager = FindObjectOfType<RespawnManager>();
     }
 
     // Update is called once per frame
@@ -20,8 +18,8 @@ public class Pics_2temps : MonoBehaviour
     {
         if (collision.tag.Equals("Player"))
         {
-            respawnManager.RespawnPlayer();
-            
+            RespawnManager.Instance.RespawnPlayer();
+
         }
     }
 }

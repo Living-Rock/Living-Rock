@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Pics_simples : MonoBehaviour
 {
-    private RespawnManager respawnManager;
     private SpriteRenderer renderer;
     private bool open;
     // Start is called before the first frame update
     void Start()
     {
-        respawnManager = FindObjectOfType<RespawnManager>();
         renderer = GetComponent<SpriteRenderer>();
         open = false;
     }
@@ -33,7 +31,7 @@ public class Pics_simples : MonoBehaviour
     {
         if (collision.tag.Equals("Player") && open)
         {
-            respawnManager.RespawnPlayer();
+            RespawnManager.Instance.RespawnPlayer();
         }
     }
 }
