@@ -14,31 +14,37 @@ public class CharacterController : MonoBehaviour
 
     private Vector2 velocity = Vector2.zero;
     private CapsuleCollider2D capsuleCollider2D;
-    private ContactFilter2D contactFilter2D;
+    [SerializeField] private ContactFilter2D contactFilter2D;
 
-    [SerializeField] private Sprite front;
-    [SerializeField] private Sprite back;
-    [SerializeField] private Sprite right;
-    [SerializeField] private Sprite left;
+    [SerializeField] private Sprite[] front;
+    [SerializeField] private Sprite[] back;
+    [SerializeField] private Sprite[] right;
+    [SerializeField] private Sprite[] left;
+
+    [SerializeField] private float animationFrameTime = 0.25f;
+
+    private int currentAnimationStep = 3;
 
     private SpriteRenderer rend;
 
     private void Awake()
     {
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
-        contactFilter2D = new ContactFilter2D();
-        contactFilter2D = contactFilter2D.NoFilter();
         rend = gameObject.GetComponent<SpriteRenderer>();
-        rend.sprite = front;
+        rend.sprite = front[0];
     }
 
     private void UpdateVelocity(Vector2 moveVector)
     {
         if (moveVector.sqrMagnitude < deadZone * deadZone)
         {
-            float velocityNorm = Mathf.Clamp(velocity.magnitude - (playerSpeed / release) * Time.deltaTime, 0.0f, playerSpeed);
+            float velocityNorm = Mathf.Clamp(velocity.magnitude - (playerSpeed / release) * Time.deltaTime, 0.0001f, playerSpeed);
 
             velocity = velocityNorm * velocity.normalized;
+
+            currentAnimationStep = 3;
+
+            UpdateSprite(velocity);
 
             return;
         }
@@ -60,20 +66,6 @@ public class CharacterController : MonoBehaviour
 
         if (count == 0) return;
 
-        /*RaycastHit2D closest_hit;
-        float closest_dist = Mathf.Infinity;
-
-        foreach(RaycastHit2D hit in results)
-        {
-            float dist = hit.distance;
-            if (dist < closest_dist)
-            {
-                closest_hit = hit;
-                closest_dist = dist;
-            }
-            
-        }*/
-
         foreach (RaycastHit2D hit in results)
         {
             Vector2 normal = hit.normal;
@@ -87,9 +79,9 @@ public class CharacterController : MonoBehaviour
     {
         Vector2 moveVector = playerInput.actions["Move"].ReadValue<Vector2>();
 
+        UpdateSprite(moveVector);
 
-
-        if(moveVector.sqrMagnitude > 1)
+        if (moveVector.sqrMagnitude > 1)
         {
             moveVector = moveVector.normalized;
         }
@@ -100,21 +92,45 @@ public class CharacterController : MonoBehaviour
 
         transform.position += (Vector3)(velocity * Time.deltaTime);
 
-        UpdateSprite(moveVector);
+        
     }
+
+    private float lastAnimationFrameDate = 0;
 
     private void UpdateSprite(Vector2 movDir)
     {
+        if(lastAnimationFrameDate + animationFrameTime < Time.time)
+        {
+            currentAnimationStep += 1;
+            currentAnimationStep %= front.Length;
+            lastAnimationFrameDate = Time.time;
+        }
+
         float abs_x = Mathf.Abs(movDir.x);
         float abs_y = Mathf.Abs(movDir.y);  
         if (abs_x < abs_y)
         {
-            if (movDir.y < 0) rend.sprite = front;
-            else rend.sprite = back;
+            if (movDir.y < 0) rend.sprite = front[currentAnimationStep];
+            else rend.sprite = back[currentAnimationStep];
         } else
         {
-            if (movDir.x < 0) rend.sprite = left;
-            else rend.sprite = right;
+            if (movDir.x < 0) rend.sprite = left[currentAnimationStep];
+            else rend.sprite = right[currentAnimationStep];
         }
     }
 }
+
+
+/*RaycastHit2D closest_hit;
+        float closest_dist = Mathf.Infinity;
+
+        foreach(RaycastHit2D hit in results)
+        {
+            float dist = hit.distance;
+            if (dist < closest_dist)
+            {
+                closest_hit = hit;
+                closest_dist = dist;
+            }
+            
+        }*/
