@@ -20,19 +20,19 @@ public class Tapis_roulant : MonoBehaviour
         {
             case Direction.haut:
                 dir = Vector2.up;
-                bounds = new Vector2(rd.bounds.size.x * 0.2f, rd.bounds.size.y);
+                bounds = new Vector2(rd.bounds.size.x * 0.9f, rd.bounds.size.y);
                 break;
             case Direction.bas:
                 dir = Vector2.down;
-                bounds = new Vector2(rd.bounds.size.x * 0.2f, rd.bounds.size.y);
+                bounds = new Vector2(rd.bounds.size.x * 0.9f, rd.bounds.size.y);
                 break;
             case Direction.gauche:
                 dir = Vector2.left;
-                bounds = new Vector2(rd.bounds.size.x, rd.bounds.size.y*.2f);
+                bounds = new Vector2(rd.bounds.size.x, rd.bounds.size.y*.9f);
                 break;
             case Direction.droite:
                 dir = Vector2.right;
-                bounds = new Vector2(rd.bounds.size.x, rd.bounds.size.y*.2f);
+                bounds = new Vector2(rd.bounds.size.x, rd.bounds.size.y*.9f);
                 break;
         }
 
