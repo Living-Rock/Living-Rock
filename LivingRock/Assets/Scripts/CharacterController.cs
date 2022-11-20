@@ -49,7 +49,7 @@ public class CharacterController : MonoBehaviour
 
     private void Start()
     {
-        transform.position = new Vector3(PlayerPrefs.GetFloat("spawnPosition_x"), PlayerPrefs.GetFloat("spawnPosition_y"), 1);
+        transform.position = new Vector3(PlayerPrefs.GetFloat("spawnPosition_x"), PlayerPrefs.GetFloat("spawnPosition_y"), 0);
         GameObject.FindGameObjectWithTag("Crystal").transform.position = transform.position + Vector3.right;
 
     }

@@ -56,7 +56,7 @@ public class SceneTransition : MonoBehaviour
         PlayerPrefs.DeleteKey("spawnPosition_y");
     }
 
-    public void ReloadCurrentScene(Vector2 spawnPos)
+    public void ReloadCurrentScene()
     {
         LoadScene(SceneManager.GetActiveScene().buildIndex);
 

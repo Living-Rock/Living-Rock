@@ -35,7 +35,7 @@ public class RespawnManager : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        SceneTransition.Instance.ReloadCurrentScene(spawnPosition);
+        SceneTransition.Instance.ReloadCurrentScene();
     }
 
 }
