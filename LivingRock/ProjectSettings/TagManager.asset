@@ -8,6 +8,7 @@ TagManager:
   - Movable
   - Tapis
   - Crystal
+  - CameraRoom
   layers:
   - Default
   - TransparentFX
