@@ -34,7 +34,7 @@ public class Dalle : MonoBehaviour
             if(onPressedByPlayer.GetPersistentEventCount() > 0)
             {
                 spriteRenderer.sprite = spriteAppuyee;
-                //dalleSound.Play();
+                dalleSound.Play();
             }    
         }
         if (collision.tag == "Crystal")
@@ -43,7 +43,7 @@ public class Dalle : MonoBehaviour
             if (onPressedByCrystal.GetPersistentEventCount() > 0)
             {
                 spriteRenderer.sprite = spriteAppuyee;
-                //dalleSound.Play();
+                dalleSound.Play();
             }
         }
         if (collision.tag == "Movable")
@@ -53,7 +53,7 @@ public class Dalle : MonoBehaviour
             if (onPressedByCaisse.GetPersistentEventCount() > 0)
             {
                 spriteRenderer.sprite = spriteAppuyee;
-                //dalleSound.Play();
+                dalleSound.Play();
             }             
         }
     }
