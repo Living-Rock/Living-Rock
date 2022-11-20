@@ -8,6 +8,7 @@ public class Lanceur : MonoBehaviour
 {
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float projectileVelocity;
+    [SerializeField] private Vector2 direction;
 
     private float tmp_timer = 2f;
     private float tmp_time;
@@ -23,7 +24,7 @@ public class Lanceur : MonoBehaviour
         if (Time.time > tmp_time + tmp_timer)
         {
             tmp_time = Time.time;
-            launchProjectiles(Vector3.up);
+            launchProjectiles(direction);
             
         }
     }
