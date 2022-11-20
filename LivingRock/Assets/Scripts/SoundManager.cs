@@ -9,7 +9,7 @@ public class SoundManager : MonoBehaviour
         AudioSource[] audio_sources = gameObject.GetComponentsInChildren<AudioSource>();
         foreach (AudioSource source in audio_sources)
         {
-            source.volume = PlayerPrefs.GetFloat("EffectsVolume");
+            //source.volume = PlayerPrefs.GetFloat("EffectsVolume");
         }
     }
 
