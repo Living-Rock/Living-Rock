@@ -38,8 +38,12 @@ public class Levier : MonoBehaviour
 
     public void OnInteract()
     {
-        if (rangeCollider.bounds.Contains(player.transform.position))
+        Vector3 playerPos = new Vector3(player.transform.position.x, player.transform.position.y,
+            transform.position.z);
+
+        if (rangeCollider.bounds.Contains(playerPos))
         {
+            Debug.Log("kwin");
             enabled = !enabled;
             if (enabled)
             {
