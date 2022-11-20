@@ -22,6 +22,13 @@ public class DistanceController : MonoBehaviour
     [SerializeField] private Image dangerRedVeil;
     [SerializeField] private Image dangerBlackVeil;
 
+    [SerializeField] private float shakeTimer;
+    [SerializeField] private float shakeDuration;
+    [SerializeField] private float shakeAmount;
+    
+    private Camera _camera;
+    private Vector3 startPos;
+
     public bool isOnRecallPlate
     {
         get
@@ -55,6 +62,7 @@ public class DistanceController : MonoBehaviour
         lifeline.positionCount = 2;
 
         playerInput.actions["Teleportation"].performed += _ => TryTeleport();
+        _camera = Camera.main;
     }
 
     private void Update()
@@ -130,4 +138,6 @@ public class DistanceController : MonoBehaviour
 
         transform.position = _teleportPos;
     }
+
+    
 }
