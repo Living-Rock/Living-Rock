@@ -11,6 +11,7 @@ public class Levier : MonoBehaviour
     [SerializeField] private Sprite spriteOn;
 
     [SerializeField] private bool enabled = false;
+    public bool Enabled { get { return enabled; } }
    
     [SerializeField] private UnityEvent onPressedByPlayer;
     [SerializeField] private UnityEvent onReleasedByPlayer;

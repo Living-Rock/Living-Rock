@@ -6,6 +6,7 @@ public class Porte : MonoBehaviour
 {
 
     [SerializeField] private bool _opened = false;
+    [SerializeField] Levier linked_lever;
     public bool opened
     {
         get
@@ -47,6 +48,11 @@ public class Porte : MonoBehaviour
             doorCollider.enabled = false;
             spriteRenderer.sprite = openedDoorSprite;
             porteSound.Play();
+            if (linked_lever.Enabled)
+            {
+                gameObject.SetActive(false);
+            }
+
         }
         else
         {
