@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Pics_2temps : MonoBehaviour
 {
-
+    [SerializeField] private Sprite openSprite;
     private SpriteRenderer renderer;
     private BoxCollider2D _collider;
     private bool open;
@@ -38,7 +36,8 @@ public class Pics_2temps : MonoBehaviour
         if (collision.tag.Equals("Player"))
         {
             open = true;
-            renderer.color = Color.black;
+            renderer.sprite = openSprite;
+            renderer.color = Color.white;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
