@@ -38,10 +38,8 @@ public class Levier : MonoBehaviour
 
     public void OnInteract()
     {
-        Debug.Log(rangeCollider.bounds.Contains(player.transform.position));
         if (rangeCollider.bounds.Contains(player.transform.position))
         {
-            Debug.Log("pouic");
             enabled = !enabled;
             if (enabled)
             {

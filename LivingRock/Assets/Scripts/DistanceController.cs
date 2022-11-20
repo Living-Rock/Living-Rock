@@ -67,7 +67,6 @@ public class DistanceController : MonoBehaviour
 
     private void Start()
     {
-        crystal.transform.position = transform.position + Vector3.right;
     }
 
     private void Update()

@@ -37,7 +37,7 @@ public class SceneTransition : MonoBehaviour
 
     private IEnumerator TransitionCo(int buildIndex)
     {
-        playerController.enabled = false;
+        if (playerController != null) playerController.enabled = false;
         if (fadeInOnSceneTransition)
         {
             fader.SetTrigger("FadeIn");
@@ -45,7 +45,7 @@ public class SceneTransition : MonoBehaviour
         }
 
         SceneManager.LoadScene(buildIndex);
-        playerController.enabled = true;
+        if (playerController != null) playerController.enabled = true;
         yield return null;
     }
     
