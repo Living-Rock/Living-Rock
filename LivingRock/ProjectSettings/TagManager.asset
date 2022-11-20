@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - Movable
   - Tapis
+  - Crystal
   layers:
   - Default
   - TransparentFX
@@ -41,6 +42,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2992483407
+    locked: 0
+  - name: Wall
+    uniqueID: 2060168781
+    locked: 0
+  - name: Ground
+    uniqueID: 1672433135
+    locked: 0
+  - name: WallBefore
+    uniqueID: 3112291325
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Props
+    uniqueID: 895516203
     locked: 0
