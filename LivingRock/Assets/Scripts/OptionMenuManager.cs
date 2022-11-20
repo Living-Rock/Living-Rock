@@ -8,17 +8,17 @@ public class OptionMenuManager : MonoBehaviour
     [SerializeField] private Menu parentMenu;
     [SerializeField] private GameObject optionButton;
     
-    private void Awake()
+    private void OnEnable()
     {
-        playerInput.actions["Pause"].performed += _ => Back();
+        playerInput.actions["Pause"].performed += Back;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        playerInput.actions["Pause"].performed -= _ => Back();
+        playerInput.actions["Pause"].performed -=Back;
     }
 
-    private void Back()
+    private void Back(InputAction.CallbackContext ctx)
     {
         if (optionMenu.gameObject.activeSelf)
         {

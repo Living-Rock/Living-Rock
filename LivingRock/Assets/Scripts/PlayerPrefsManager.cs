@@ -8,7 +8,6 @@ public class PlayerPrefsManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(GetPref("EffectsVolume", 1f));
         effectsVolume.value = GetPref("EffectsVolume", 1f);
         musicVolume.value = GetPref("MusicVolume", 1f);
     }
