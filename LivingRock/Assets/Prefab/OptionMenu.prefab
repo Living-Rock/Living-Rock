@@ -439,6 +439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectsVolume: {fileID: 1953681486738397665}
   musicVolume: {fileID: 1953681487827624809}
+  audioMixer: {fileID: 24100000, guid: 97fc33d5edf51224d9f4d97455394ecf, type: 2}
 --- !u!1 &1953681487007310388
 GameObject:
   m_ObjectHideFlags: 0

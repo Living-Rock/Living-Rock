@@ -1,21 +1,36 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class PlayerPrefsManager : MonoBehaviour
 {
     [SerializeField] private Slider effectsVolume;
     [SerializeField] private Slider musicVolume;
 
+    [SerializeField] AudioMixer audioMixer;
+
     private void Start()
     {
         effectsVolume.value = GetPref("EffectsVolume", 1f);
         musicVolume.value = GetPref("MusicVolume", 1f);
+
+        UpdateMusicVolume();
+        UpdateEffectVolume();
     }
 
     private void SetPref(string key, float value)
     {
         PlayerPrefs.SetFloat(key, value);
         PlayerPrefs.Save();
+
+        if(key == "EffectsVolume")
+        {
+            audioMixer.SetFloat("sfxVol", value);
+        }
+        if(key == "MusicVolume")
+        {
+            audioMixer.SetFloat("musicVol", value);
+        }
     }
 
     private float GetPref(string key, float placeholder)
@@ -25,11 +40,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
     public void UpdateEffectVolume()
     {
-        SetPref("EffectsVolume", effectsVolume.value);
+        SetPref("EffectsVolume", 10 * Mathf.Log(Mathf.Clamp(musicVolume.value, 0.0000001f, 1.0f)));
     }
 
     public void UpdateMusicVolume()
     {
-        SetPref("MusicVolume", musicVolume.value);
+        SetPref("MusicVolume", 10 * Mathf.Log(Mathf.Clamp(musicVolume.value, 0.0000001f, 1.0f)));
     }
 }
