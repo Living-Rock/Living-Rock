@@ -25,11 +25,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
         if(key == "EffectsVolume")
         {
-            audioMixer.SetFloat("sfxVol", value);
+            audioMixer.SetFloat("sfxVol", 10 * Mathf.Log(Mathf.Clamp(effectsVolume.value, 0.0000001f, 1.0f)));
         }
         if(key == "MusicVolume")
         {
-            audioMixer.SetFloat("musicVol", value);
+            audioMixer.SetFloat("musicVol", 10 * Mathf.Log(Mathf.Clamp(musicVolume.value, 0.0000001f, 1.0f)));
         }
     }
 
@@ -40,11 +40,11 @@ public class PlayerPrefsManager : MonoBehaviour
 
     public void UpdateEffectVolume()
     {
-        SetPref("EffectsVolume", 10 * Mathf.Log(Mathf.Clamp(musicVolume.value, 0.0000001f, 1.0f)));
+        SetPref("EffectsVolume", effectsVolume.value);
     }
 
     public void UpdateMusicVolume()
     {
-        SetPref("MusicVolume", 10 * Mathf.Log(Mathf.Clamp(musicVolume.value, 0.0000001f, 1.0f)));
+        SetPref("MusicVolume", musicVolume.value);
     }
 }
