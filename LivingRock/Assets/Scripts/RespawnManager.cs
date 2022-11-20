@@ -5,7 +5,6 @@ public class RespawnManager : MonoBehaviour
 {
     private static RespawnManager instance;
 
-    public int respawnSceneIndex { get; set; }
     public Vector2 spawnPosition { get; set; }
 
     public static RespawnManager Instance {get; private set;}
@@ -21,16 +20,22 @@ public class RespawnManager : MonoBehaviour
             Instance = this;
         }
         DontDestroyOnLoad(gameObject);
+
+        if (!PlayerPrefs.HasKey("spawnPosition_x"))
+        {
+            PlayerPrefs.SetFloat("spawnPosition_x", transform.position.x);
+            PlayerPrefs.SetFloat("spawnPosition_y", transform.position.y);
+        }
     }
 
     private void Start()
     {
-        respawnSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        spawnPosition = FindObjectOfType<CharacterController>().transform.position;
     }
 
     public void RespawnPlayer()
     {
-        SceneTransition.Instance.ReloadCurrentScene(respawnSceneIndex, spawnPosition);
+        SceneTransition.Instance.ReloadCurrentScene(spawnPosition);
     }
 
 }

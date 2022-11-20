@@ -47,6 +47,13 @@ public class CharacterController : MonoBehaviour
         rend.sprite = front[0];
     }
 
+    private void Start()
+    {
+        transform.position = new Vector3(PlayerPrefs.GetFloat("spawnPosition_x"), PlayerPrefs.GetFloat("spawnPosition_y"), 1);
+        GameObject.FindGameObjectWithTag("Crystal").transform.position = transform.position + Vector3.right;
+
+    }
+
     private void UpdateVelocity(Vector2 moveVector)
     {
         if (moveVector.sqrMagnitude < deadZone * deadZone)

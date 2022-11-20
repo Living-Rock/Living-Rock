@@ -11,6 +11,7 @@ public class SceneTransition : MonoBehaviour
     [SerializeField] private float fadeInDuration = 1f;
 
     private CharacterController playerController;
+    [SerializeField] private GameObject crystal;
 
     public static SceneTransition Instance { get; private set; }
 
@@ -32,7 +33,6 @@ public class SceneTransition : MonoBehaviour
     public void LoadScene(int buildIndex)
     {
         StartCoroutine(TransitionCo(buildIndex));
-        
     }
 
     private IEnumerator TransitionCo(int buildIndex)
@@ -52,17 +52,21 @@ public class SceneTransition : MonoBehaviour
     public void LoadNextScene()
     {
         LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        PlayerPrefs.DeleteKey("spawnPosition_x");
+        PlayerPrefs.DeleteKey("spawnPosition_y");
     }
 
-    public void ReloadCurrentScene(int index, Vector2 position)
+    public void ReloadCurrentScene(Vector2 spawnPos)
     {
-        LoadScene(index);
-        playerController.gameObject.transform.position = (Vector3)position;
+        LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
 
     public void BackToMainMenu()
     {
         LoadScene(mainMenuBuildIndex);
+        PlayerPrefs.DeleteKey("spawnPosition_x");
+        PlayerPrefs.DeleteKey("spawnPosition_y");
     }
 
     public void Quit()

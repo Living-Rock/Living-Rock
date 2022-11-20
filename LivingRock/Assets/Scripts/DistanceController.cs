@@ -65,6 +65,11 @@ public class DistanceController : MonoBehaviour
         _camera = Camera.main;
     }
 
+    private void Start()
+    {
+        crystal.transform.position = transform.position + Vector3.right;
+    }
+
     private void Update()
     {
         lifeline.SetPosition(0, transform.position);
