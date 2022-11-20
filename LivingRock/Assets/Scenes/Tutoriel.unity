@@ -37586,6 +37586,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Porte_2
       objectReference: {fileID: 0}
+    - target: {fileID: 7460503317244289648, guid: e9239fc097dd5f8448754b645d7ca7ba, type: 3}
+      propertyPath: _opened
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7460503317244289649, guid: e9239fc097dd5f8448754b645d7ca7ba, type: 3}
       propertyPath: m_RootOrder
       value: 30
@@ -38292,6 +38296,10 @@ PrefabInstance:
     - target: {fileID: 7460503317244289615, guid: e9239fc097dd5f8448754b645d7ca7ba, type: 3}
       propertyPath: m_Name
       value: Porte_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7460503317244289648, guid: e9239fc097dd5f8448754b645d7ca7ba, type: 3}
+      propertyPath: _opened
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7460503317244289649, guid: e9239fc097dd5f8448754b645d7ca7ba, type: 3}
       propertyPath: m_RootOrder
@@ -41974,7 +41982,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7460503317244289648, guid: e9239fc097dd5f8448754b645d7ca7ba, type: 3}
       propertyPath: _opened
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7460503317244289649, guid: e9239fc097dd5f8448754b645d7ca7ba, type: 3}
       propertyPath: m_RootOrder
