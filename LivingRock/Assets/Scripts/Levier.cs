@@ -11,6 +11,7 @@ public class Levier : MonoBehaviour
     [SerializeField] private Sprite spriteOn;
 
     [SerializeField] private bool enabled = false;
+    public bool Enabled { get { return enabled; } }
    
     [SerializeField] private UnityEvent onPressedByPlayer;
     [SerializeField] private UnityEvent onReleasedByPlayer;
@@ -24,7 +25,7 @@ public class Levier : MonoBehaviour
 
     private void Awake()
     {
-        rangeCollider = GetComponent<Collider2D>();
+        rangeCollider = gameObject.GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = spriteOff;
         player = GameObject.FindGameObjectWithTag("Player");
@@ -37,8 +38,10 @@ public class Levier : MonoBehaviour
 
     public void OnInteract()
     {
+        Debug.Log(rangeCollider.bounds.Contains(player.transform.position));
         if (rangeCollider.bounds.Contains(player.transform.position))
         {
+            Debug.Log("pouic");
             enabled = !enabled;
             if (enabled)
             {

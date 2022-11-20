@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class DistanceController : MonoBehaviour
 {
@@ -18,6 +19,15 @@ public class DistanceController : MonoBehaviour
 
     [SerializeField] private bool _isOnRecallPlate = false;
     [SerializeField] private Vector2 _teleportPos = Vector2.zero;
+    [SerializeField] private Image dangerRedVeil;
+    [SerializeField] private Image dangerBlackVeil;
+
+    [SerializeField] private float shakeTimer;
+    [SerializeField] private float shakeDuration;
+    [SerializeField] private float shakeAmount;
+    
+    private Camera _camera;
+    private Vector3 startPos;
 
     public bool isOnRecallPlate
     {
@@ -52,6 +62,12 @@ public class DistanceController : MonoBehaviour
         lifeline.positionCount = 2;
 
         playerInput.actions["Teleportation"].performed += _ => TryTeleport();
+        _camera = Camera.main;
+    }
+
+    private void Start()
+    {
+        crystal.transform.position = transform.position + Vector3.right;
     }
 
     private void Update()
@@ -63,6 +79,19 @@ public class DistanceController : MonoBehaviour
 
         Color color = Color.Lerp(initColor, dangerColor, distance / (dieDistance * scale));
         color.a = 1f;
+
+        float dangerDistance = 0.5f * dieDistance * scale;
+        Color tmp = dangerRedVeil.color;
+        Color tmp_2 = dangerBlackVeil.color;
+        if (distance >= dangerDistance)
+        {
+            float t = (1/(dieDistance * scale - dangerDistance)) * distance - 1 * dangerDistance / (dieDistance * scale - dangerDistance);
+            tmp.a = t*0.8f;
+            tmp_2.a = t*0.8f;
+            dangerRedVeil.color = tmp;
+            dangerBlackVeil.color = tmp_2;
+        }
+
         lifeline.startColor = color;
         lifeline.endColor = color;
         
@@ -113,4 +142,6 @@ public class DistanceController : MonoBehaviour
 
         transform.position = _teleportPos;
     }
+
+    
 }

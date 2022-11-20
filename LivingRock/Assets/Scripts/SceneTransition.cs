@@ -9,7 +9,10 @@ public class SceneTransition : MonoBehaviour
     [SerializeField] private bool fadeOutOnStart = true;
     [SerializeField] private bool fadeInOnSceneTransition = true;
     [SerializeField] private float fadeInDuration = 1f;
-    
+
+    private CharacterController playerController;
+    [SerializeField] private GameObject crystal;
+
     public static SceneTransition Instance { get; private set; }
 
     private void Awake()
@@ -22,6 +25,7 @@ public class SceneTransition : MonoBehaviour
 
     private void Start()
     {
+        playerController = FindObjectOfType<CharacterController>();
         if (fadeOutOnStart)
             fader.SetTrigger("FadeOut");
     }
@@ -33,6 +37,7 @@ public class SceneTransition : MonoBehaviour
 
     private IEnumerator TransitionCo(int buildIndex)
     {
+        playerController.enabled = false;
         if (fadeInOnSceneTransition)
         {
             fader.SetTrigger("FadeIn");
@@ -40,22 +45,28 @@ public class SceneTransition : MonoBehaviour
         }
 
         SceneManager.LoadScene(buildIndex);
+        playerController.enabled = true;
         yield return null;
     }
     
     public void LoadNextScene()
     {
         LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        PlayerPrefs.DeleteKey("spawnPosition_x");
+        PlayerPrefs.DeleteKey("spawnPosition_y");
     }
 
-    public void ReloadCurrentScene()
+    public void ReloadCurrentScene(Vector2 spawnPos)
     {
         LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
 
     public void BackToMainMenu()
     {
         LoadScene(mainMenuBuildIndex);
+        PlayerPrefs.DeleteKey("spawnPosition_x");
+        PlayerPrefs.DeleteKey("spawnPosition_y");
     }
 
     public void Quit()
