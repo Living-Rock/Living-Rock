@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 1627048004777422498}
   crystal: {fileID: 0}
-  dieDistance: 15
+  dieDistance: 10
   recallPlateDieDistanceScale: 2
   playerLight: {fileID: 1744012057932243724}
   visionLossSteps:
@@ -1021,6 +1021,11 @@ MonoBehaviour:
   dangerColor: {r: 1, g: 0, b: 0, a: 0}
   _isOnRecallPlate: 0
   _teleportPos: {x: 0, y: 0}
+  dangerRedVeil: {fileID: 0}
+  dangerBlackVeil: {fileID: 0}
+  shakeTimer: 0
+  shakeDuration: 0
+  shakeAmount: 0
   lifeline: {fileID: 0}
 --- !u!1 &1627048004777422501
 GameObject:
