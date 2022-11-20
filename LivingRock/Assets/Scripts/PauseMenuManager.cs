@@ -13,6 +13,11 @@ public class PauseMenuManager : MonoBehaviour
         playerInput.actions["Pause"].performed += _ => SetPause();
     }
 
+    private void OnDestroy()
+    {
+        playerInput.actions["Pause"].performed -= _ => SetPause();
+    }
+
     public void SetPause()
     {
         if (optionMenu.gameObject.activeSelf)
