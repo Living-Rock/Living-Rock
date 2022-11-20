@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RespawnManager : MonoBehaviour
 {
     private static RespawnManager instance;
+
+    public int respawnSceneIndex { get; set; }
+    public Vector2 spawnPosition { get; set; }
 
     public static RespawnManager Instance {get; private set;}
 
@@ -19,9 +23,14 @@ public class RespawnManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Start()
+    {
+        respawnSceneIndex = SceneManager.GetActiveScene().buildIndex;
+    }
+
     public void RespawnPlayer()
     {
-        SceneTransition.Instance.ReloadCurrentScene();
+        SceneTransition.Instance.ReloadCurrentScene(respawnSceneIndex, spawnPosition);
     }
 
 }

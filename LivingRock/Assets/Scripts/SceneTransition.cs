@@ -9,7 +9,9 @@ public class SceneTransition : MonoBehaviour
     [SerializeField] private bool fadeOutOnStart = true;
     [SerializeField] private bool fadeInOnSceneTransition = true;
     [SerializeField] private float fadeInDuration = 1f;
-    
+
+    private CharacterController playerController;
+
     public static SceneTransition Instance { get; private set; }
 
     private void Awake()
@@ -22,6 +24,7 @@ public class SceneTransition : MonoBehaviour
 
     private void Start()
     {
+        playerController = FindObjectOfType<CharacterController>();
         if (fadeOutOnStart)
             fader.SetTrigger("FadeOut");
     }
@@ -29,10 +32,12 @@ public class SceneTransition : MonoBehaviour
     public void LoadScene(int buildIndex)
     {
         StartCoroutine(TransitionCo(buildIndex));
+        
     }
 
     private IEnumerator TransitionCo(int buildIndex)
     {
+        playerController.enabled = false;
         if (fadeInOnSceneTransition)
         {
             fader.SetTrigger("FadeIn");
@@ -40,6 +45,7 @@ public class SceneTransition : MonoBehaviour
         }
 
         SceneManager.LoadScene(buildIndex);
+        playerController.enabled = true;
         yield return null;
     }
     
@@ -48,9 +54,10 @@ public class SceneTransition : MonoBehaviour
         LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void ReloadCurrentScene()
+    public void ReloadCurrentScene(int index, Vector2 position)
     {
-        LoadScene(SceneManager.GetActiveScene().buildIndex);
+        LoadScene(index);
+        playerController.gameObject.transform.position = (Vector3)position;
     }
 
     public void BackToMainMenu()

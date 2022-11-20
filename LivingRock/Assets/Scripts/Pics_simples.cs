@@ -4,23 +4,26 @@ using UnityEngine;
 
 public class Pics_simples : MonoBehaviour
 {
+    private BoxCollider2D _collider;
     // Start is called before the first frame update
     void Start()
     {
+        _collider = gameObject.GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag.Equals("Player"))
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, _collider.bounds.extents * 0.95f, 0);
+        foreach (Collider2D collider in colliders)
         {
-            RespawnManager.Instance.RespawnPlayer();
-
+            if (collider.tag.Equals("Player") || collider.tag.Equals("Crystal"))
+            {
+                RespawnManager.Instance.RespawnPlayer();
+                break;
+            }
         }
     }
+
 }
 

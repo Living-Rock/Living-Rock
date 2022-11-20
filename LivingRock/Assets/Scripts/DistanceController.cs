@@ -70,7 +70,6 @@ public class DistanceController : MonoBehaviour
         lifeline.SetPosition(0, transform.position);
         lifeline.SetPosition(1, crystal.position);
         float distance = Mathf.Abs(Vector2.Distance(transform.position, crystal.position));
-        Debug.Log(distance);
         float scale = _isOnRecallPlate ? recallPlateDieDistanceScale : 1f;
 
         Color color = Color.Lerp(initColor, dangerColor, distance / (dieDistance * scale));
