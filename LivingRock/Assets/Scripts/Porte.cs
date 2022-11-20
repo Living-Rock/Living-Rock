@@ -48,10 +48,10 @@ public class Porte : MonoBehaviour
             doorCollider.enabled = false;
             spriteRenderer.sprite = openedDoorSprite;
             porteSound.Play();
-            if (linked_lever.Enabled)
+            /*if (linked_lever.Enabled)
             {
                 gameObject.SetActive(false);
-            }
+            }*/
 
         }
         else
